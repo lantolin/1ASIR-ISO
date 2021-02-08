@@ -87,7 +87,7 @@ web/html/tablas.html 1389 -rw-r--r--
 web/img 4096 drwxrwxr-x
 web/img/root.png 45179 -rw-r--r--" >/tmp/P_LINUSR_ficheros_y_directorios_OK.txt
 
-  find "${BASE}"/ -printf "%P %s %M\n" | grep -v 'web-nueva [34] lrwxrwxrwx' | sort >/tmp/P_LINUSR_ficheros_y_directorios.txt
+  find "${BASE}"/ -printf "%P %s %M\n" | grep -v 'web-nueva [0-9]* lrwxrwxrwx' | sort >/tmp/P_LINUSR_ficheros_y_directorios.txt
   if diff -q /tmp/P_LINUSR_ficheros_y_directorios_OK.txt /tmp/P_LINUSR_ficheros_y_directorios.txt >/dev/null; then
     echo -ne "TEST: comparando directorio de destino: "
     print_result 0 "Ficheros y Directorios están correctos."
@@ -97,6 +97,13 @@ web/img/root.png 45179 -rw-r--r--" >/tmp/P_LINUSR_ficheros_y_directorios_OK.txt
   fi
 
   local_link "${BASE}"/web-nueva
+
+  ls "${BASE}"/web >/tmp/1.txt
+  ls "${BASE}"/web-nueva >/tmp/2.txt
+  echo -ne "TEST: probando el link simbólico: "
+  diff -q /tmp/1.txt /tmp/2.txt >/dev/null;
+  RESULTADO=$?
+  print_result $RESULTADO
 }
 
 echo -ne "= ${BLUE}TESTS LOCALES${NC}\n"
@@ -105,6 +112,7 @@ local_mac $MAC
 local_hostname $(printf "ubuntu%02d" ${NUM_LISTA[$i]})
 local_user ${ID1}
 local_internet
+local_clave_publica_autorizada
 
 PG_LINUSR_escape
 EC_LINUSR_gestion_de_directorios

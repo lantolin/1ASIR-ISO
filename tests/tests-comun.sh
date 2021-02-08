@@ -239,3 +239,12 @@ function quitar_proxy_apt() {
   echo -ne "${YELLOW}Eliminando proxy APT${NC}\n"
   ssh root@${IP} rm -f /etc/apt/apt.conf.d/02proxy >/dev/null
 }
+
+function local_clave_publica_autorizada() {
+  echo -ne "TEST: Clave Publica [$USER]\t\t"
+  grep -q "^ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC3dPH7Hn4z5LsHwxXiM2FnrbJEkM2YKn11YXmXHULm8zCgVejMxVfMYCYuRaxoCME6bFc0v6qUcohHD+p3TR6DKpXvzrqoBzBhdBhwAbjFw+qyKvhdnVxJgdsGdzUTaEUT4a7EAJECHsqdQcbHBKYtZZ7K8RCktjIL+bZxVIohXdB/dVsQfZyjFQPL6mzjsPXf30FZYsRnWMNsXm6qWtUDY7wcqI12NyE7G2icu0VLF3Y0BJC07QhQsfJBIb42Hup5yO8IlhtRuAGJ6hGyyOMP79yfNqTDIQh6Y4iySRg51jTOYqNhIjXP+h5s8ODsNoCjBKiZx6uZNUk4brmFgH0B" $HOME/.ssh/authorized_keys
+
+  RESULTADO=$?
+  print_result $RESULTADO
+  return $RESULTADO
+}
