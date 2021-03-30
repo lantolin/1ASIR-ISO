@@ -4,5 +4,5 @@
 ./munch2 400 &
 for (( i=1; i<=20; i++ ))
 do 
-  ./zombieInfinity
+  ./zombieInfinity &
 done
