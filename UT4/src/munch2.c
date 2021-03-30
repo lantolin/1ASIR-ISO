@@ -1,6 +1,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <unistd.h>
+
 
 int main(int argc, char** argv) {
     int max = -1;
@@ -13,8 +15,6 @@ int main(int argc, char** argv) {
     buffer=malloc(1024*1024*max);
     memset(buffer, 0, 1024*1024*max);
     printf("Allocated %d MB\n", max);
-    getchar();
-
-
+    sleep (300000);
     return 0;
 }
