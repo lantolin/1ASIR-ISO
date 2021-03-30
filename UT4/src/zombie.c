@@ -8,7 +8,7 @@ int main ()
 
   child_pid = fork ();
   if (child_pid > 0) {
-    sleep (300);
+    sleep (300000);
   }
   else {
     exit (0);
