@@ -1,8 +1,10 @@
 #!/bin/bash
 
-nohup ./stress-ng --cpu-load 60 --cpu 1 &
-nohup ./munch2 400 &
+BASE=/root/1ASIR-ISO-code/UT4/src/
+
+nohup "${BASE}"/stress-ng --cpu-load 60 --cpu 1 &
+nohup "${BASE}"/munch2 400 &
 for (( i=1; i<=20; i++ ))
 do 
- nohup  ./zombieInfinity &
+ nohup "${BASE}"/zombieInfinity &
 done
