@@ -3,7 +3,7 @@
 ### TODO: hay que mejorar esto para que solo cree los problemas si no existen ya
 
 
-BASE=/root/1ASIR-ISO-code/UT4/src/
+BASE=/root/1ASIR-ISO/UT4/src/
 
 stress-ng --cpu-load 60 --cpu 1 &
 
@@ -17,3 +17,5 @@ else
     "${BASE}"/zombieInfinity &
   done
 fi
+
+
