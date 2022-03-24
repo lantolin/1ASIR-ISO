@@ -10,7 +10,7 @@ stress-ng --cpu-load 60 --cpu 1 &
 "${BASE}"/munch2 400 &
 
 if ! ps -fe | grep soyUnProceso | grep -v grep; then
-  for ((i = 1; i <= 20; i++)); do
+  for ((i = 1; i <= 50; i++)); do
     "${BASE}"/soyUnProceso &
   done
 fi
