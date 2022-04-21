@@ -1,3 +1,5 @@
-obj-m += kpanic.o
-all:
-	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) modules
+KDIR := /lib/modules/$(shell uname -r)/build
+PWD := $(shell pwd)
+
+default:
+	$(MAKE) -C $(KDIR) SUBDIRS=$(PWD) modules

@@ -1,11 +1,19 @@
-#include <linux/kernel.h>
+#ifdef __KERNEL__
+
 #include <linux/module.h>
+#include <linux/kernel.h>
 
-MODULE_LICENSE("GPL");
+static int __init panic_init(void)
+{
+panic("force-panic");
+return 0;
+}
 
-static int8_t* message = "DON'T PANIC? ... no, panic!";
+static void __exit panic_exit(void)
+{
+}
 
-int init_module(void){
-    panic(message);
-    return 0;
-    }
+module_init(panic_init);
+module_exit(panic_exit);
+
+#endif
