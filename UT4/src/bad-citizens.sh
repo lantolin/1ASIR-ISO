@@ -27,15 +27,13 @@ echo "NUM_ZOMBIS=${NUM_ZOMBIS}" >>${LOG}
 MAX_ZOMBIS=100
 
 if [[ $NUM_ZOMBIS -ge $MAX_ZOMBIS ]]; then
-  echo "suficientes zombis"  >>${LOG}
+  echo "suficientes zombis" >>${LOG}
 else
-  MAS_ZOMBIS=$(( $MAX_ZOMBIS - $NUM_ZOMBIS ))
+  MAS_ZOMBIS=$(($MAX_ZOMBIS - $NUM_ZOMBIS))
   echo "añadiendo $MAS_ZOMBIS zombis" >>${LOG}
-  if ! ps -fe | grep soyUnProceso | grep -v grep; then
-    for ((i = 1; i <= $MAS_ZOMBIS ; i++)); do
-      "${BASE}"/soyUnProceso &
-    done
-  fi
+  for ((i = 1; i <= $MAS_ZOMBIS; i++)); do
+    "${BASE}"/soyUnProceso &
+  done
 fi
 
 echo "FIN $(date +"%Y-%m-%d_%H.%M.%S")" >>${LOG}
