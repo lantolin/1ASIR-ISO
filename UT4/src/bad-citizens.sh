@@ -5,26 +5,28 @@
 BASE=/root/1ASIR-ISO/UT4/src/
 LOG=/tmp/bad-citizens.log
 
+MAX_ZOMBIS=100
+CPU_LOAD=70
+MEM_USE=430
+
 echo "####### INICIO $(date +"%Y-%m-%d_%H.%M.%S")" >>${LOG}
 
 if ps -fe | grep stress-ng | grep -q -v grep; then
   echo "stress-ng ya esta corriendo" >>${LOG}
 else
   echo "stress-ng se lanza" >>${LOG}
-  stress-ng --cpu-load 70 --cpu 1 &
+  stress-ng --cpu-load $CPU_LOAD --cpu 1 &
 fi
 
 if ps -fe | grep munch | grep -q -v grep; then
   echo "munch ya esta corriendo" >>${LOG}
 else
   echo "munch se lanza" >>${LOG}
-  "${BASE}"/munch2 430 &
+  "${BASE}"/munch2 $MEM_USE &
 fi
 
 NUM_ZOMBIS=$(ps -e -O status | grep -w Z | grep -v grep | wc -l)
 echo "NUM_ZOMBIS=${NUM_ZOMBIS}" >>${LOG}
-
-MAX_ZOMBIS=100
 
 if [[ $NUM_ZOMBIS -ge $MAX_ZOMBIS ]]; then
   echo "suficientes zombis" >>${LOG}
