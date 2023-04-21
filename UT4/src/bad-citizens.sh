@@ -7,14 +7,14 @@ LOG=/tmp/bad-citizens.log
 
 echo "####### INICIO $(date +"%Y-%m-%d_%H.%M.%S")" >>${LOG}
 
-if ps -fe | grep stress-ng | grep -v grep; then
+if ps -fe | grep stress-ng | grep -q -v grep; then
   echo "stress-ng ya esta corriendo" >>${LOG}
 else
   echo "stress-ng se lanza" >>${LOG}
   stress-ng --cpu-load 70 --cpu 1 &
 fi
 
-if ps -fe | grep munch | grep -v grep; then
+if ps -fe | grep munch | grep -q -v grep; then
   echo "munch ya esta corriendo" >>${LOG}
 else
   echo "munch se lanza" >>${LOG}
