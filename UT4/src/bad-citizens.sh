@@ -6,7 +6,7 @@ BASE=/root/1ASIR-ISO/UT4/src/
 LOG=/tmp/bad-citizens.log
 
 MAX_ZOMBIS=100
-CPU_LOAD=70
+CPU_LOAD=80
 MEM_USE=430
 
 echo "####### INICIO $(date +"%Y-%m-%d_%H.%M.%S")" >>${LOG}
