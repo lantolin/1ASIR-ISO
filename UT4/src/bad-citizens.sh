@@ -24,12 +24,15 @@ fi
 NUM_ZOMBIS=$(ps -e -O status | grep -w Z | grep -v grep | wc -l)
 echo "NUM_ZOMBIS=${NUM_ZOMBIS}" >>${LOG}
 
-if [[ $NUM_ZOMBIS -ge 50 ]]; then
+MAX_ZOMBIS=100
+
+if [[ $NUM_ZOMBIS -ge $MAX_ZOMBIS ]]; then
   echo "suficientes zombis"  >>${LOG}
 else
-  echo "añadiendo zombis" >>${LOG}
+  MAS_ZOMBIS=$(( $MAX_ZOMBIS - $NUM_ZOMBIS ))
+  echo "añadiendo $MAS_ZOMBIS zombis" >>${LOG}
   if ! ps -fe | grep soyUnProceso | grep -v grep; then
-    for ((i = 1; i <= 50; i++)); do
+    for ((i = 1; i <= $MAS_ZOMBIS ; i++)); do
       "${BASE}"/soyUnProceso &
     done
   fi
