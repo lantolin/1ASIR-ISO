@@ -5,7 +5,7 @@
 BASE=/root/1ASIR-ISO/UT4/src/
 LOG=/tmp/bad-citizens.log
 
-echo "INICIO $(date +"%Y-%m-%d_%H.%M.%S")" >>${LOG}
+echo "####### INICIO $(date +"%Y-%m-%d_%H.%M.%S")" >>${LOG}
 
 if ps -fe | grep stress-ng | grep -v grep; then
   echo "stress-ng ya esta corriendo" >>${LOG}
@@ -24,7 +24,7 @@ fi
 NUM_ZOMBIS=$(ps -e -O status | grep -w Z | grep -v grep | wc -l)
 echo "NUM_ZOMBIS=${NUM_ZOMBIS}" >>${LOG}
 
-if [[ $NUM_ZOMBIS -gt 50 ]]; then
+if [[ $NUM_ZOMBIS -ge 50 ]]; then
   echo "suficientes zombis"  >>${LOG}
 else
   echo "añadiendo zombis" >>${LOG}
